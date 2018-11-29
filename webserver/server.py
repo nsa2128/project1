@@ -36,12 +36,12 @@ app = Flask(__name__, template_folder=tmpl_dir)
 # For your convenience, we already set it to the class database
 
 # Use the DB credentials you received by e-mail
-DB_USER = "YOUR_DB_USERNAME_HERE"
-DB_PASSWORD = "YOUR_DB_PASSWORD_HERE"
+DB_USER = "nsa2128"
+DB_PASSWORD = "s9xyf567"
 
 DB_SERVER = "w4111.cisxo09blonu.us-east-1.rds.amazonaws.com"
 
-DATABASEURI = "postgresql://"+DB_USER+":"+DB_PASSWORD+"@"+DB_SERVER+"/w4111"
+DATABASEURI = "postgresql://nsa2128:s9xyf567@w4111.cisxo09blonu.us-east-1.rds.amazonaws.com/w4111"
 
 
 #
@@ -58,6 +58,536 @@ engine.execute("""CREATE TABLE IF NOT EXISTS test (
 );""")
 engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 
+#login and logout script
+def login(client, username, password):
+    return client.post('/login', data=dict(
+        username=test,
+        password=test
+    ), follow_redirects=True)
+
+
+def logout(client):
+    return client.get('/logout', follow_redirects=True)
+
+#USERS
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Users (id User_ID PRIMARY KEY VARCHAR(255), Location VARCHAR(255), Email VARCHAR(255), Name VARCHAR(255))")
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Users (User_ID, Location, Email, Name) VALUES (%s, %s, %s, %s)"
+val = [
+  ('1607021983999', 'New York, NY', 'auctor.velit@fringillaornare.edu','Erich Shepherd'),
+  ('1674102716999', 'Trenton, NJ','turpis.nec.mauris@Nullamvitaediam.com','Kadeem Chen'),
+  ('1629061975899', 'Hartford, CT','turpis.In.condimentum@Aliquam.com','Nadine Morgan'),
+  ('1623070645399', 'Pittsburgh, PA','velit.dui@est.co.uk','Alec Massey'),
+  ('1666112356499', 'Brooklyn, NY','elit.erat@magnaSed.ca','Hedwig Guzman'),
+  ('1655081999499', 'Queens, New York','ultricies@odio.net','Kirk Estrada'),
+  ('1670022307799', 'Staten Island, NY','consequat.enim.diam@sed.edu','Quinn Cameron'),
+  ('1625050981299', 'Bronx, NY','Quisque.varius.Nam@fermentummetus.com','Abel Monroe'),
+  ('1662091137999', 'Montpelier, VT','vestibulum@dolor.net','Destiny Hayden'),
+  ('1641062295399', 'Augusta, ME','risus@magnisdisparturient.edu','Shad Stanley'),
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+#Elected Officials
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Elected_Official(id User_ID PRIMARY KEY VARCHAR(255), Area_Represented VARCHAR(255), Date_Elected VARCHAR(255), Name VARCHAR(255), Reelection_Date VARCHAR(255), Voting_Record VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Elected_Official (Name, Area_Represented, Date_Elected, Reelection_Date, Voting_Record, User_ID) VALUES (%s, %s, %s, %s, %s, %s)"
+val = [
+  ('Joy Dunn','New York, NY','Jul 29, 2018','Aug 10, 2020','Votes with President Trump 10% of time','1611011500199'), 
+  ('Quamar Mccullough','Hartford, CT','Dec 6, 2017','Sep 2, 2020','Votes with President Trump 22% of time','1649041495499'),
+  ('Chelsea Salazar','Concord, NH','Apr 2, 2018','Apr 27, 2020','Votes with President Trump 81% of time','1685121867299'),
+  ('Guinevere Watts','Pittsburgh, PA','Apr 6, 2018','May 12, 2020','Votes with President Trump 54% of time','1673080540299'),
+  ('Noah Wright','Brooklyn, NY','Nov 21, 2017','Nov 6, 2019','Votes with President Trump 18% of time','1609052156299'),
+  ('Theodore Mcclure','Staten Island, NY','Dec 19, 2017','May 20, 2020','Votes with President Trump 60% of time','1655031946399'),   ('Theodore Ramsey','Bronx, NY','Jul 29, 2018','Jun 23, 2020','Votes with President Trump 90% of time','1656092668799'),
+  ('Plato Warren','Montpelier, VT','Aug 28, 2018','Feb 25, 2020','Votes with President Trump 28% of time','1631100493399'),
+  ('Lani Cortez','Augusta, ME','May 9, 2018','Mar 29, 2020','Votes with President Trump 60% of time','1652032782899'),
+  ('Halee Velez','Trenton, NJ','Dec 4, 2017','Aug 10, 2020','Votes with President Trump 95% of time','1681041285299'),
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Candidate
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Candidate (id User_ID PRIMARY KEY VARCHAR(255), Biography VARCHAR(255), Name VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Candidate (Biography, Name, User_ID) VALUES (%s, %s, %s)"
+val = [
+  ('Dale Higgins is a Republican from New York.','Dale Higgins','1683121782299'),
+  ('Gray Love is a Democrat from New Jersey.','Gray Love','1626012009099'),
+  ('Nita Alford is an Independent from Maine.','Nita Alford','1693013074799'),
+  ('Burton Watkins is a Democrat from Vermont.','Burton Watkins','1694022326299'),
+  ('Edan Valenzuela is a Democrat from New York.','Edan Valenzuela','1660041338099'),
+  ('Steven Holloway is a Republican from New Jersey.','Steven Holloway','1642120713599'),
+  ('Herrod Alford is an Independent from New York.','Herrod Alford','1638041876699'),
+  ('Zane Cooper is a Democrat from New York.','Zane Cooper','1689050694199'),
+  ('Madeson Santana is a Republican from Connecticut.','Madeson Santana','1674082738899'),
+  ('Vielka Conley is a Democrat from New York.','Vielka Conley','1665020853899')
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Voter
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Voter (id User_ID PRIMARY KEY VARCHAR(255), Voter_ID VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Voter (User_ID, Voter_ID) VALUES (%s, %s)"
+val = [
+  ('22313673099','1601021471299'),
+  ('35851273299','1679122048599'), 
+  ('85286035299','1643121220899'), 
+  ('48656916499','1653082526899'),
+  ('03291258699','1680091382599'), 
+  ('97970750399','1649081252599'),
+  ('29777992599','1619021367499'), 
+  ('35950233099','1657101651299'), 
+  ('29647432199','1667071401599'), 
+  ('40641032299','1668051827099')
+
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Political Party
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Political_Party (id Name_of_Party PRIMARY KEY VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Political_Party (Name_of_Party) VALUES (%s)"
+val = [
+  ('Democrat'),
+  ('Republican'),
+  ('Independent'),
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#User Party Affiliation
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE User_Party_Affiliation (id User_ID PRIMARY KEY VARCHAR(255), Name_of_Party VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO User_Party_Affiliation (Name_of_Party, User_ID) VALUES (%s, %s)"
+val = [
+  ('Republican','1647112658699'),
+  ('Democrat','1644110133199'),
+  ('Independent','1663081568199'),
+  ('Republican','1653052616099'), 
+  ('Independent','1620090721699'), 
+  ('Democrat','1649070683199'), 
+  ('Republican','1650100895499'),
+  ('Independent','1603080366699'),
+  ('Democrat','1673040411199'), 
+  ('Republican','1605051122199')
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Election
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Election (id Location PRIMARY KEY VARCHAR(255), Date VARCHAR(255), Type VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Election (Location, Date, Type) VALUES (%s, %s, %s)"
+val = [
+  ('1690 Tellus Ave','2020-11-03','Presidential'),
+  ('283 Dictum Road','2020-11-03','Presidential'), 
+  ('732 Risus. Rd.','2020-11-03','Presidential'), 
+  ('7021 Arcu. Ave','2018-11-06','Midterm'),
+  (' 5000 Nec St.','2020-11-03','Presidential'), 
+  (' 5071 Mauris Av.','2018-11-06','Midterm'), 
+  ('4870 Dui. Rd.','2018-11-06','Midterm'), 
+  ('4258 Sodales St.','2018-11-06','Midterm'), 
+  (' 3061 Vitae Rd.','2020-11-03’, ‘Presidential’), 
+  (' 9297 Donec Rd.','2018-11-06','Midterm')
+
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Participates In
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Participates_In (id User_ID PRIMARY KEY VARCHAR(255), Location VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Participates_In (User_ID, Location) VALUES (%s, %s)"
+val = [
+  ('1607021983999','New York, NY'), 
+  ('1674102716999','Trenton, NJ'), 
+  ('1629061975899','Hartford, CT'), 
+  ('1623070645399','Pittsburgh, PA'), 
+  ('1666112356499','Brooklyn, NY'), 
+  ('1655081999499','Queens, New York'), 
+  ('1670022307799','Staten Island, NY'), 
+  ('1625050981299','Bronx, NY'), 
+  ('1662091137999','Montpelier, VT'), 
+  ('1641062295399','Augusta, ME')
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Discussion Thread
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Discussion_Thread (id Topic PRIMARY KEY VARCHAR(255), Category VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Discussion_Thread (Topic, Category) VALUES (%s, %s)"
+val = [
+ ('Voting Rights','Will Florida vote to restore voting rights to those formerly convicted of crimes?'),
+ ('Climate Change', 'UN climate Change Report'),
+ ('Electoral College','Should we get rid of the Electoral College?'), 
+ ('The Supreme Court','Did Brett Kavanaugh deserve to be confirmed?'),
+ ('Climate Change','What can we do to help mitigate climate change?'), 
+ ('Affirmative Action','Harvard Anti-Asian Bias Case'), 
+ ('Party Division','Do true Independents still exist?'), 
+ ('Gender Equality','The Wage Gap'), 
+ ('Healthcare','Will Republicans vote to repeal Obamacare if they keep the House after the midterm elections?'),
+ ('Immigration','Trump’s Travel Ban 3.0')
+
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#User Posts Messages
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE User_Posts_Messages (id Topic PRIMARY KEY VARCHAR(255), User_ID VARCHAR(255), Name VARCHAR(255), Category VARCHAR(255), Time datetime)")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO User_Posts_Messages (User_ID, Name, Category, Topic, Time) VALUES (%s, %s, %s, %s, %s)"
+val = [
+  ('1607021983999','Erich Shepherd','Voting Rights','Will Florida vote to restore voting rights to those formerly convicted of crimes?', '8:00 AM'),
+  ('1674102716999','Kadeem Chen','Climate Change', 'UN Climate Change Report', '9:00 AM'),
+  ('1629061975899','Nadine Morgan','Electoral College','Should we get rid of the Electoral College?', '10:00 AM'),
+  ('1623070645399','Alec Massey','The Supreme Court','Did Brett Kavanaugh deserve to be confirmed?', '11:00 AM'),
+  ('1666112356499','Hedwig Guzman','Climate Change','What can we do to help mitigate climate change?','12:00 PM'),
+  ('1655081999499','Kirk Estrada','Affirmative Action','Harvard Anti-Asian Bias Case', '1:00 PM'),
+  ('1670022307799','Quinn Cameron','Party Division','Do true Independents still exist?', '2:00 PM'),
+  ('1625050981299','Abel Monroe','Gender Equality','The Wage Gap', '3:00 PM'),
+  ('1662091137999','Destiny Hayden','Healthcare','Will Republicans vote to repeal Obamacare if they keep the House after the midterm elections?','4:00 PM'),
+  ('1641062295399','Shad Stanley','Immigration','Trump’s Travel Ban 3.0', '5:00 PM')
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Rates
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Rates (id Name PRIMARY KEY VARCHAR(255), Rating PRIMARY KEY INT, User_ID VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Rates (Name, User_ID, Rating) VALUES (%s, %s, %s)"
+val = [
+  ('Dale Higgins','1683121782299','1') 
+  ('Gray Love','35851273299', '1'), 
+  ('Nita Alford','85286035299', '2'), 
+  ('Burton Watkins','48656916499', '2'), 
+  ('Edan Valenzuela','03291258699', '3'),
+  ('Steven Holloway','97970750399', '3'), 
+  ('Herrod Alford','29777992599', '4'), 
+  ('Zane Cooper', '35950233099', '4'), 
+  ('Madeson Santana','29647432199', '5'), 
+  ('Vielka Conley','40641032299', '5')
+
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
+
+
+#Represented By
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+mycursor.execute("CREATE TABLE Represented_By (id User_ID PRIMARY KEY VARCHAR(255), Area_Represented PRIMARY KEY VARCHAR(255), Name VARCHAR(255))")
+
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",
+  user="nsa2128",
+  passwd="s9xyf567",
+  database="w4111"
+)
+
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Represented_By (Voter_ID, Area_Represented VALUES (%s, %s)"
+val = [
+  ('22313673099','New York, NY'), 
+  ('35851273299','Hartford, CT'), 
+  ('85286035299','Concord, NH'), 
+  ('48656916499','Pittsburgh, PA'), 
+  ('03291258699','Brooklyn, NY'), 
+  ('97970750399','Staten Island, NY'),
+  ('29777992599','Bronx, New York'), 
+  ('35950233099','Montpelier, VT'), 
+  ('29647432199','Augusta, ME'), 
+  ('40641032299','Trenton, NJ')
+]
+
+mycursor.executemany(sql, val)
+
+mydb.commit()
 
 
 @app.before_request
